@@ -11,10 +11,10 @@
 
 // Constructor for hardware SPI
 Adafruit_MCP3008::Adafruit_MCP3008(uint8_t cs) {
-    chipSelect = cs;
+    this->cs = cs;
     
-    pinMode(chipSelect, OUTPUT);
-    digitalWrite(chipSelect, HIGH);
+    pinMode(this->cs, OUTPUT);
+    digitalWrite(this->cs, HIGH);
     SPI.begin();
 }
 
@@ -56,7 +56,7 @@ int Adafruit_MCP3008::SPIxADC(uint8_t channel, bool differential) {
     }
     
     SPI.beginTransaction(SPISettings(MCP3008_SPI_MAX, MCP3008_SPI_ORDER, MCP3008_SPI_MODE));
-    digitalWrite(chipSelect, LOW);
+    digitalWrite(cs, LOW);
     
     b0 = SPI.transfer(  (0x01 << 7) |                 // start bit
                         (sgldiff << 6) |              // single or differential
@@ -65,7 +65,7 @@ int Adafruit_MCP3008::SPIxADC(uint8_t channel, bool differential) {
     b1 = SPI.transfer(0x00);
     b2 = SPI.transfer(0x00);
     
-    digitalWrite(chipSelect, HIGH);
+    digitalWrite(cs, HIGH);    
     SPI.endTransaction();
     
     return 0x3FF & ((b0 & 0x01) << 9 |
