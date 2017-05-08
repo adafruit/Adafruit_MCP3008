@@ -1,5 +1,5 @@
 # Adafruit_MCP3008
-Adruino Library for MCP3008 8-Channel 10-Bit ADC with SPI inteface.
+Adruino Library for MCP3008 8-Channel 10-Bit ADC with SPI interface.
 http://www.adafruit.com/products/856
 
 Tested for the following boards using pins shown.
@@ -17,4 +17,4 @@ DGND | GND | GND | GND | GND
 
 <sup>1</sup>also works for non-Feather HUZZAH, use (XX) pins
 
-<sup>2</sup>use any avialable digital pin
+<sup>2</sup>use any available digital pin
