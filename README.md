@@ -10,8 +10,8 @@ VDD | 5V | 3V | 3V | 3V
 VREF | 5V | 3V | 3V | 3V
 AGND | GND | GND | GND | GND
 CLK | 13 | SCK (14) | SCK | SCK
-DOUT | 12 | MI (12) | MISO | SCK
-DIN | 11 | MO (13) | MOSI | SCK
+DOUT | 12 | MI (12) | MISO | MISO
+DIN | 11 | MO (13) | MOSI | MOSI
 CS | 10 | any<sup>2</sup> (15) | any<sup>2</sup> | any<sup>2</sup>
 DGND | GND | GND | GND | GND
 
