@@ -2,8 +2,13 @@
   This is an Arduino Library for the MCP3008 - 8-Channel 10-Bit ADC
   With SPI Interface.
   ----> http://www.adafruit.com/products/856
- 
-  TODO: add more banner text
+  
+  Adafruit invests time and resources providing this open source code,
+  please support Adafruit and open-source hardware by purchasing
+  products from Adafruit!
+
+  Copyright (c) 2017, Adafruit Industries (adafruit.com)
+  MIT License (https://opensource.org/licenses/MIT)
 ****************************************************/
 #ifndef Adafruit_MCP3008_h
 #define Adafruit_MCP3008_h
