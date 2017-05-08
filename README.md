@@ -16,4 +16,5 @@ CS | 10 | any<sup>2</sup> (15) | any<sup>2</sup> | any<sup>2</sup>
 DGND | GND | GND | GND | GND
 
 <sup>1</sup>also works for non-Feather HUZZAH, use (XX) pins
+
 <sup>2</sup>use any avialable digital pin
