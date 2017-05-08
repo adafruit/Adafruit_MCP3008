@@ -8,21 +8,25 @@ License: Public Domain
 
 #include <Adafruit_MCP3008.h>
 
-// Hardware SPI
-// Arduino UNO, ESP8266
-//Adafruit_MCP3008 adc();
-// Feather 32u4 
-Adafruit_MCP3008 adc(5);
-
-// Software SPI (sck, mosi, miso, cs);
-//Adafruit_MCP3008 adc(14, 13, 12, 15);
+Adafruit_MCP3008 adc;
 
 int count = 0;
 
 void setup() {
   Serial.begin(9600);
+  while (!Serial);
 
   Serial.println("MCP3008 simple test.");
+
+  // Hardware SPI (specify CS, use any available digital)
+  // Can use defaults if available, ex: UNO (SS=10) or Huzzah (SS=15)
+  adc.begin();
+  // Feather 32u4 (SS=17) or M0 (SS=16), defaults SS not broken out, must specify
+  //adc.begin(10);  
+
+  // Software SPI (specify all, use any available digital)
+  // (sck, mosi, miso, cs);
+  //adc.begin(13, 11, 12, 10);
 }
 
 void loop() {

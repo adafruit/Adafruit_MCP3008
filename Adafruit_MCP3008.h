@@ -18,8 +18,8 @@
 
 class Adafruit_MCP3008 {
   public:
-    Adafruit_MCP3008(uint8_t cs=SS);
-    Adafruit_MCP3008(uint8_t sck, uint8_t mosi, uint8_t miso, uint8_t cs);
+    bool begin(uint8_t cs=SS);
+    bool begin(uint8_t sck, uint8_t mosi, uint8_t miso, uint8_t cs);
     int readADC(uint8_t channel);
     int readADCDifference(uint8_t differential);
   private:

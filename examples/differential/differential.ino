@@ -8,11 +8,7 @@ License: Public Domain
 
 #include <Adafruit_MCP3008.h>
 
-// Hardware SPI
 Adafruit_MCP3008 adc;
-
-// Software SPI (sck, mosi, miso, cs);
-//Adafruit_MCP3008 adc(14, 13, 12, 15);
 
 int count = 0;
 
@@ -20,6 +16,18 @@ void setup() {
   Serial.begin(9600);
 
   Serial.println("MCP3008 simple test.");
+
+  // Hardware SPI (specify CS, use any available digital)
+  // Can use defaults if available
+  // ex: UNO (SS=10) or Huzzah (SS=15)
+  adc.begin();
+  // Specify if needed or to override default
+  // ex: Feather 32u4 (SS=17) or M0 (SS=16), default SS not broken out
+  //adc.begin(10);  
+
+  // Software SPI (specify all, use any available digital)
+  //          sck, mosi, miso, cs
+  //adc.begin(13,    11,   12, 10);  
 }
 
 void loop() {
