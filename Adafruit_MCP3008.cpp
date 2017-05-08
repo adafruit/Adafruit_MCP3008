@@ -74,7 +74,6 @@ int Adafruit_MCP3008::SPIxADC(uint8_t channel, bool differential) {
              ((channel & 0x07) << 3) );    // channel number
   
   if (hwSPI) {
-    SPI.begin();
     byte b0, b1, b2;
   
     SPI.beginTransaction(SPISettings(MCP3008_SPI_MAX, MCP3008_SPI_ORDER, MCP3008_SPI_MODE));
