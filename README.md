@@ -1,6 +1,9 @@
-# Adafruit_MCP3008
-Adruino Library for MCP3008 8-Channel 10-Bit ADC with SPI interface.
-http://www.adafruit.com/products/856
+Adafruit_MCP3008 [![Build Status](https://travis-ci.com/adafruit/Adafruit_MCP3008.svg?branch=master)](https://travis-ci.com/adafruit/Adafruit_MCP3008)
+================
+
+<a href="https://www.adafruit.com/product/856"><img src="assets/board.jpg?raw=true" width="500px"></a>
+
+This is the Adafruit MCP3008 - 8-Channel 10-Bit ADC With SPI Interface Library.
 
 Tested for the following boards using pins shown.
 
