@@ -1,20 +1,40 @@
-/***************************************************
-  This is an Arduino Library for the MCP3008 - 8-Channel 10-Bit ADC
-  With SPI Interface.
-  ----> http://www.adafruit.com/products/856
-  
-  Adafruit invests time and resources providing this open source code,
-  please support Adafruit and open-source hardware by purchasing
-  products from Adafruit!
+/*!
+ *  @file Adafruit_MCP3008.cpp
+ *
+ *  @mainpage Adafruit MCP3008 - 8-Channel 10-Bit ADC
+ *
+ *  @section intro_sec Introduction
+ *
+ *  This is a library for the MCP3008 - 8-Channel 10-Bit ADC.
+ *
+ *  Designed specifically to work with the Adafruit MCP3008.
+ *
+ *  Pick one up today in the adafruit shop!
+ *  ------> https://www.adafruit.com/product/856
+ *
+ *  These breakout use SPI to communicate, 4 ping are required.
+ *
+ *  Adafruit invests time and resources providing this open source code,
+ *  please support Adafruit andopen-source hardware by purchasing products
+ *  from Adafruit!
+ *
+ *  @section license License
+ *
+ *  MIT license, all text above must be included in any redistribution
+ */
 
-  Copyright (c) 2017, Adafruit Industries (adafruit.com)
-  MIT License (https://opensource.org/licenses/MIT)
-****************************************************/
 #include "Adafruit_MCP3008.h"
 
 #include <SPI.h>
 
 // Initialize for hardware SPI
+
+/*!
+ *    @brief  Initialize for hardware SPI
+ *    @param  cs
+ *            number of CSPIN (Chip Select)
+ *    @return true if process is successful
+ */
 bool Adafruit_MCP3008::begin(uint8_t cs) {
   hwSPI = true;
 
@@ -23,9 +43,22 @@ bool Adafruit_MCP3008::begin(uint8_t cs) {
   pinMode(this->cs, OUTPUT);
   digitalWrite(this->cs, HIGH);
   SPI.begin();
+
+  return true;
 }
 
-// Initialize for software SPI
+/*!
+ *    @brief  Initialize for software SPI
+ *    @param  sck
+ *            number of pin used for SCK (Serial Clock)
+ *    @param  mosi
+ *            number of pin used for MOSI (Master Out Slave In)
+ *    @param  miso
+ *            number of pin used for MISO (Master In Slave Out)
+ *    @param  cs
+ *            number of pin used for CS (Chip Select)
+ *    @return true if process is successful
+ */
 bool Adafruit_MCP3008::begin(uint8_t sck, uint8_t mosi, uint8_t miso, uint8_t cs) {
   hwSPI = false;
   
@@ -42,23 +75,34 @@ bool Adafruit_MCP3008::begin(uint8_t sck, uint8_t mosi, uint8_t miso, uint8_t cs
   digitalWrite(this->sck, LOW);
   digitalWrite(this->mosi, LOW);
   digitalWrite(this->cs, HIGH);
+
+  return true;
 }
 
-// Read single ended ADC channel.
+/*!
+ *    @brief  Read single ended ADC channel.
+ *    @param  channel
+ *            channel number
+ *    @return -1 if channel < 0 or channel > 7, otherwise ADC (int)
+ */
 int Adafruit_MCP3008::readADC(uint8_t channel) {
   if ((channel < 0) || (channel > 7)) return -1;
   return SPIxADC(channel, false);
 }
 
-// Read differential ADC channel.
-//      0: Return channel 0 minus channel 1
-//      1: Return channel 1 minus channel 0
-//      2: Return channel 2 minus channel 3
-//      3: Return channel 3 minus channel 2
-//      4: Return channel 4 minus channel 5
-//      5: Return channel 5 minus channel 4
-//      6: Return channel 6 minus channel 7
-//      7: Return channel 7 minus channel 6
+/*!
+ *    @brief  Read differential ADC channel.
+ *    @param  differential
+ *            0: Return channel 0 minus channel 1
+ *            1: Return channel 1 minus channel 0
+ *            2: Return channel 2 minus channel 3
+ *            3: Return channel 3 minus channel 2
+ *            4: Return channel 4 minus channel 5
+ *            5: Return channel 5 minus channel 4
+ *            6: Return channel 6 minus channel 7
+ *            7: Return channel 7 minus channel 6
+ *    @return -1 if channel < 0 or channel > 7, otherwise ADC difference (int)
+ */
 int Adafruit_MCP3008::readADCDifference(uint8_t differential) {
   if ((differential < 0) || (differential > 7)) return -1;
   return SPIxADC(differential, true);
