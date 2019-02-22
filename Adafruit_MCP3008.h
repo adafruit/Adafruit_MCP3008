@@ -21,29 +21,30 @@
 
 #include <Arduino.h>
 
-#define MCP3008_SPI_MAX_5V  3600000 ///< SPI MAX Value on 5V pin
-#define MCP3008_SPI_MAX_3V  1350000 ///< SPI MAX Value on 3V pin
-#define MCP3008_SPI_MAX     MCP3008_SPI_MAX_3V ///< SPI MAX Value
-#define MCP3008_SPI_ORDER   MSBFIRST ///<  SPI ORDER
-#define MCP3008_SPI_MODE    SPI_MODE0 ///< SPI MODE
+#define MCP3008_SPI_MAX_5V 3600000         ///< SPI MAX Value on 5V pin
+#define MCP3008_SPI_MAX_3V 1350000         ///< SPI MAX Value on 3V pin
+#define MCP3008_SPI_MAX MCP3008_SPI_MAX_3V ///< SPI MAX Value
+#define MCP3008_SPI_ORDER MSBFIRST         ///<  SPI ORDER
+#define MCP3008_SPI_MODE SPI_MODE0         ///< SPI MODE
 
 /*!
  *  @brief  Class that stores state and functions for interacting with
  *          MCP3008 Chip
  */
 class Adafruit_MCP3008 {
-  public:
-    bool begin(uint8_t cs=SS);
-    bool begin(uint8_t sck, uint8_t mosi, uint8_t miso, uint8_t cs);
-    int readADC(uint8_t channel);
-    int readADCDifference(uint8_t differential);
-  private:
-    uint8_t cs;
-    uint8_t mosi;
-    uint8_t miso;
-    uint8_t sck;
-    bool hwSPI;
-    int SPIxADC(uint8_t channel, bool differential);
+public:
+  bool begin(uint8_t cs = SS);
+  bool begin(uint8_t sck, uint8_t mosi, uint8_t miso, uint8_t cs);
+  int readADC(uint8_t channel);
+  int readADCDifference(uint8_t differential);
+
+private:
+  uint8_t cs;
+  uint8_t mosi;
+  uint8_t miso;
+  uint8_t sck;
+  bool hwSPI;
+  int SPIxADC(uint8_t channel, bool differential);
 };
 
 #endif
