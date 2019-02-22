@@ -33,16 +33,20 @@
  *    @brief  Initialize for hardware SPI
  *    @param  cs
  *            number of CSPIN (Chip Select)
+ *    @param  theSPI
+ *            optional SPI object
  *    @return true if process is successful
  */
-bool Adafruit_MCP3008::begin(uint8_t cs) {
+bool Adafruit_MCP3008::begin(uint8_t cs, SPIClass* theSPI) {
   hwSPI = true;
 
   this->cs = cs;
 
   pinMode(this->cs, OUTPUT);
   digitalWrite(this->cs, HIGH);
-  SPI.begin();
+  _spi = theSPI;
+  _spi->begin();
+  /* SPI.begin(); */
 
   return true;
 }
@@ -128,16 +132,16 @@ int Adafruit_MCP3008::SPIxADC(uint8_t channel, bool differential) {
   if (hwSPI) {
     byte b0, b1, b2;
 
-    SPI.beginTransaction(
+    _spi->beginTransaction(
         SPISettings(MCP3008_SPI_MAX, MCP3008_SPI_ORDER, MCP3008_SPI_MODE));
     digitalWrite(cs, LOW);
 
-    b0 = SPI.transfer(command);
-    b1 = SPI.transfer(0x00);
-    b2 = SPI.transfer(0x00);
+    b0 = _spi->transfer(command);
+    b1 = _spi->transfer(0x00);
+    b2 = _spi->transfer(0x00);
 
     digitalWrite(cs, HIGH);
-    SPI.endTransaction();
+    _spi->endTransaction();
 
     return 0x3FF & ((b0 & 0x01) << 9 | (b1 & 0xFF) << 1 | (b2 & 0x80) >> 7);
 
