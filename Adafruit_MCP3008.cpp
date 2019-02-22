@@ -154,7 +154,7 @@ int Adafruit_MCP3008::SPIxADC(uint8_t channel, bool differential) {
     // 5 command bits + 1 null bit + 10 data bits = 16 bits
     outBuffer = command << 8;
     for (int c = 0; c < 16; c++) {
-      digitalWrite(mosi, (outBuffer >> 15 - c) & 0x01);
+      digitalWrite(mosi, (outBuffer >> (15 - c)) & 0x01);
       digitalWrite(sck, HIGH);
       digitalWrite(sck, LOW);
       inBuffer <<= 1;
