@@ -37,7 +37,7 @@
  *            optional SPI object
  *    @return true if process is successful
  */
-bool Adafruit_MCP3008::begin(uint8_t cs, SPIClass* theSPI) {
+bool Adafruit_MCP3008::begin(uint8_t cs, SPIClass *theSPI) {
   hwSPI = true;
 
   this->cs = cs;
