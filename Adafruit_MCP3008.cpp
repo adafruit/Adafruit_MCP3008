@@ -38,17 +38,10 @@
  *    @return true if process is successful
  */
 bool Adafruit_MCP3008::begin(uint8_t cs, SPIClass *theSPI) {
-  hwSPI = true;
-
-  this->cs = cs;
-
-  pinMode(this->cs, OUTPUT);
-  digitalWrite(this->cs, HIGH);
-  _spi = theSPI;
-  _spi->begin();
-  /* SPI.begin(); */
-
-  return true;
+  _cs = cs;
+  spi_dev = new Adafruit_SPIDevice(cs, MCP3008_SPI_FREQ, MCP3008_SPI_ORDER,
+                                   MCP3008_SPI_MODE, theSPI);
+  return spi_dev->begin();
 }
 
 /*!
@@ -65,23 +58,10 @@ bool Adafruit_MCP3008::begin(uint8_t cs, SPIClass *theSPI) {
  */
 bool Adafruit_MCP3008::begin(uint8_t sck, uint8_t mosi, uint8_t miso,
                              uint8_t cs) {
-  hwSPI = false;
-
-  this->sck = sck;
-  this->mosi = mosi;
-  this->miso = miso;
-  this->cs = cs;
-
-  pinMode(this->sck, OUTPUT);
-  pinMode(this->mosi, OUTPUT);
-  pinMode(this->miso, INPUT);
-  pinMode(this->cs, OUTPUT);
-
-  digitalWrite(this->sck, LOW);
-  digitalWrite(this->mosi, LOW);
-  digitalWrite(this->cs, HIGH);
-
-  return true;
+  _cs = cs;
+  spi_dev = new Adafruit_SPIDevice(cs, sck, miso, mosi, MCP3008_SPI_FREQ,
+                                   MCP3008_SPI_ORDER, MCP3008_SPI_MODE);
+  return spi_dev->begin();
 }
 
 /*!
@@ -117,53 +97,13 @@ int Adafruit_MCP3008::readADCDifference(uint8_t differential) {
 
 // SPI transfer for ADC read
 int Adafruit_MCP3008::SPIxADC(uint8_t channel, bool differential) {
-  byte command, sgldiff;
-
-  if (differential) {
-    sgldiff = 0;
-  } else {
-    sgldiff = 1;
-  }
-
-  command = ((0x01 << 7) |             // start bit
-             (sgldiff << 6) |          // single or differential
-             ((channel & 0x07) << 3)); // channel number
-
-  if (hwSPI) {
-    byte b0, b1, b2;
-
-    _spi->beginTransaction(
-        SPISettings(MCP3008_SPI_MAX, MCP3008_SPI_ORDER, MCP3008_SPI_MODE));
-    digitalWrite(cs, LOW);
-
-    b0 = _spi->transfer(command);
-    b1 = _spi->transfer(0x00);
-    b2 = _spi->transfer(0x00);
-
-    digitalWrite(cs, HIGH);
-    _spi->endTransaction();
-
-    return 0x3FF & ((b0 & 0x01) << 9 | (b1 & 0xFF) << 1 | (b2 & 0x80) >> 7);
-
-  } else {
-
-    uint16_t outBuffer, inBuffer = 0;
-
-    digitalWrite(cs, LOW);
-
-    // 5 command bits + 1 null bit + 10 data bits = 16 bits
-    outBuffer = command << 8;
-    for (int c = 0; c < 16; c++) {
-      digitalWrite(mosi, (outBuffer >> (15 - c)) & 0x01);
-      digitalWrite(sck, HIGH);
-      digitalWrite(sck, LOW);
-      inBuffer <<= 1;
-      if (digitalRead(miso))
-        inBuffer |= 0x01;
-    }
-
-    digitalWrite(cs, HIGH);
-
-    return inBuffer & 0x3FF;
-  }
+  // see datasheet sec 6.1
+  buffer[0] = 0x01;
+  buffer[1] = ((differential ? 0 : 1) << 7) | (channel << 4);
+  spi_dev->beginTransaction();
+  digitalWrite(_cs, LOW);
+  spi_dev->transfer(buffer, 3);
+  digitalWrite(_cs, HIGH);
+  spi_dev->endTransaction();
+  return (((uint16_t)(buffer[1] & 0x07)) << 8) | buffer[2];
 }

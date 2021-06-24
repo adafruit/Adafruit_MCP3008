@@ -19,14 +19,15 @@
 #ifndef Adafruit_MCP3008_h
 #define Adafruit_MCP3008_h
 
+#include <Adafruit_SPIDevice.h>
 #include <Arduino.h>
-#include <SPI.h>
 
-#define MCP3008_SPI_MAX_5V 3600000         ///< SPI MAX Value on 5V pin
-#define MCP3008_SPI_MAX_3V 1350000         ///< SPI MAX Value on 3V pin
-#define MCP3008_SPI_MAX MCP3008_SPI_MAX_3V ///< SPI MAX Value
-#define MCP3008_SPI_ORDER MSBFIRST         ///<  SPI ORDER
-#define MCP3008_SPI_MODE SPI_MODE0         ///< SPI MODE
+#define MCP3008_SPI_MAX_5V 3600000              ///< SPI MAX Value on 5V pin
+#define MCP3008_SPI_MAX_3V 1350000              ///< SPI MAX Value on 3V pin
+#define MCP3008_SPI_MAX MCP3008_SPI_MAX_3V      ///< SPI MAX Value
+#define MCP3008_SPI_ORDER SPI_BITORDER_MSBFIRST ///< SPI bit order
+#define MCP3008_SPI_MODE SPI_MODE0              ///< SPI mode
+#define MCP3008_SPI_FREQ 1000000                ///< SPI clock speed
 
 /*!
  *  @brief  Class that stores state and functions for interacting with
@@ -40,13 +41,10 @@ public:
   int readADCDifference(uint8_t differential);
 
 private:
-  uint8_t cs;
-  uint8_t mosi;
-  uint8_t miso;
-  uint8_t sck;
-  bool hwSPI;
+  Adafruit_SPIDevice *spi_dev = NULL; ///< Pointer to SPI bus interface
+  uint8_t _cs;
+  uint8_t buffer[3];
   int SPIxADC(uint8_t channel, bool differential);
-  SPIClass *_spi;
 };
 
 #endif
