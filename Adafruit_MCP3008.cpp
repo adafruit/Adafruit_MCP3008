@@ -59,7 +59,8 @@ bool Adafruit_MCP3008::begin(uint8_t cs, SPIClass *theSPI) {
 bool Adafruit_MCP3008::begin(uint8_t sck, uint8_t mosi, uint8_t miso,
                              uint8_t cs) {
   _cs = cs;
-  spi_dev = new Adafruit_SPIDevice(cs, sck, miso, mosi, MCP3008_SPI_FREQ, MCP3008_SPI_ORDER, MCP3008_SPI_MODE);
+  spi_dev = new Adafruit_SPIDevice(cs, sck, miso, mosi, MCP3008_SPI_FREQ,
+                                   MCP3008_SPI_ORDER, MCP3008_SPI_MODE);
   return spi_dev->begin();
 }
 
@@ -104,5 +105,5 @@ int Adafruit_MCP3008::SPIxADC(uint8_t channel, bool differential) {
   spi_dev->transfer(buffer, 3);
   digitalWrite(_cs, HIGH);
   spi_dev->endTransaction();
-  return (((uint16_t)buffer[1] & 0x07) << 8) | buffer[2];
+  return (((uint16_t)(buffer[1] & 0x07)) << 8) | buffer[2];
 }

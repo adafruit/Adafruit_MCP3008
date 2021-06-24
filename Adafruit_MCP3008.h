@@ -19,15 +19,15 @@
 #ifndef Adafruit_MCP3008_h
 #define Adafruit_MCP3008_h
 
-#include <Arduino.h>
 #include <Adafruit_SPIDevice.h>
+#include <Arduino.h>
 
-#define MCP3008_SPI_MAX_5V 3600000         ///< SPI MAX Value on 5V pin
-#define MCP3008_SPI_MAX_3V 1350000         ///< SPI MAX Value on 3V pin
-#define MCP3008_SPI_MAX MCP3008_SPI_MAX_3V ///< SPI MAX Value
-#define MCP3008_SPI_ORDER SPI_BITORDER_MSBFIRST         ///< SPI bit order
-#define MCP3008_SPI_MODE SPI_MODE0         ///< SPI mode
-#define MCP3008_SPI_FREQ 1000000           ///< SPI clock speed
+#define MCP3008_SPI_MAX_5V 3600000              ///< SPI MAX Value on 5V pin
+#define MCP3008_SPI_MAX_3V 1350000              ///< SPI MAX Value on 3V pin
+#define MCP3008_SPI_MAX MCP3008_SPI_MAX_3V      ///< SPI MAX Value
+#define MCP3008_SPI_ORDER SPI_BITORDER_MSBFIRST ///< SPI bit order
+#define MCP3008_SPI_MODE SPI_MODE0              ///< SPI mode
+#define MCP3008_SPI_FREQ 1000000                ///< SPI clock speed
 
 /*!
  *  @brief  Class that stores state and functions for interacting with
