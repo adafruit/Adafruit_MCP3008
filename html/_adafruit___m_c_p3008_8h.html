@@ -65,8 +65,8 @@ $(function() {
 <div class="title">Adafruit_MCP3008.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
-<code>#include &lt;SPI.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;Adafruit_SPIDevice.h&gt;</code><br />
+<code>#include &lt;Arduino.h&gt;</code><br />
 </div>
 <p><a href="_adafruit___m_c_p3008_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -91,13 +91,17 @@ Macros</h2></td></tr>
 <tr class="memdesc:a589ae31195f5e35b29d886679c8e7edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI MAX Value. <br /></td></tr>
 <tr class="separator:a589ae31195f5e35b29d886679c8e7edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63306ca7ff65367ef8c413dfb23c094d"><td class="memItemLeft" align="right" valign="top"><a id="a63306ca7ff65367ef8c413dfb23c094d"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___m_c_p3008_8h.html#a63306ca7ff65367ef8c413dfb23c094d">MCP3008_SPI_ORDER</a>&#160;&#160;&#160;MSBFIRST</td></tr>
-<tr class="memdesc:a63306ca7ff65367ef8c413dfb23c094d"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI ORDER. <br /></td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___m_c_p3008_8h.html#a63306ca7ff65367ef8c413dfb23c094d">MCP3008_SPI_ORDER</a>&#160;&#160;&#160;SPI_BITORDER_MSBFIRST</td></tr>
+<tr class="memdesc:a63306ca7ff65367ef8c413dfb23c094d"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI bit order. <br /></td></tr>
 <tr class="separator:a63306ca7ff65367ef8c413dfb23c094d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81344fffa73fbaf093e01c0408b4c5b6"><td class="memItemLeft" align="right" valign="top"><a id="a81344fffa73fbaf093e01c0408b4c5b6"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___m_c_p3008_8h.html#a81344fffa73fbaf093e01c0408b4c5b6">MCP3008_SPI_MODE</a>&#160;&#160;&#160;SPI_MODE0</td></tr>
-<tr class="memdesc:a81344fffa73fbaf093e01c0408b4c5b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI MODE. <br /></td></tr>
+<tr class="memdesc:a81344fffa73fbaf093e01c0408b4c5b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI mode. <br /></td></tr>
 <tr class="separator:a81344fffa73fbaf093e01c0408b4c5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c071628164c9dde94b41cde4152e43d"><td class="memItemLeft" align="right" valign="top"><a id="a4c071628164c9dde94b41cde4152e43d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___m_c_p3008_8h.html#a4c071628164c9dde94b41cde4152e43d">MCP3008_SPI_FREQ</a>&#160;&#160;&#160;1000000</td></tr>
+<tr class="memdesc:a4c071628164c9dde94b41cde4152e43d"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI clock speed. <br /></td></tr>
+<tr class="separator:a4c071628164c9dde94b41cde4152e43d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This is a library for the MCP3008 - 8-Channel 10-Bit ADC with SPI Interface.</p>
