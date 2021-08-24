@@ -27,6 +27,11 @@
 
 #include <SPI.h>
 
+Adafruit_MCP3008::~Adafruit_MCP3008() {
+  if (spi_dev)
+    delete spi_dev;
+}
+
 // Initialize for hardware SPI
 
 /*!
@@ -39,6 +44,8 @@
  */
 bool Adafruit_MCP3008::begin(uint8_t cs, SPIClass *theSPI) {
   _cs = cs;
+  if (spi_dev)
+    delete spi_dev;
   spi_dev = new Adafruit_SPIDevice(cs, MCP3008_SPI_FREQ, MCP3008_SPI_ORDER,
                                    MCP3008_SPI_MODE, theSPI);
   return spi_dev->begin();
