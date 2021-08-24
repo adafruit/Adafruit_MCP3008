@@ -35,6 +35,7 @@
  */
 class Adafruit_MCP3008 {
 public:
+  ~Adafruit_MCP3008();
   bool begin(uint8_t cs = SS, SPIClass *theSPI = &SPI);
   bool begin(uint8_t sck, uint8_t mosi, uint8_t miso, uint8_t cs);
   int readADC(uint8_t channel);
